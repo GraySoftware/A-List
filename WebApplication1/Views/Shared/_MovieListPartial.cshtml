@@ -1,0 +1,20 @@
+﻿@model AList.Models.ViewModels.ActorVM
+
+<div class="form-group mt-2 mb-2 border border-light rounded">
+    <div class="m-2" style="max-height: 200px; overflow: auto;">
+
+        <h4>Select Movies</h4>
+        <div>
+            @foreach (var movie in ViewBag.AvailableMovies)
+            {
+                <div class="checkbox" Checked="true">
+                    <label>
+                        <input type="checkbox" name="SelectedMovieIds" value="@movie.Id" @(ViewBag.CurrentMovies.Contains(movie) ? "checked" : "") />
+                        @movie.Title
+                    </label>
+                </div>
+            }
+            <span asp-validation-for="SelectedMovieIds" class="text-danger"></span>
+        </div>
+    </div>
+</div>

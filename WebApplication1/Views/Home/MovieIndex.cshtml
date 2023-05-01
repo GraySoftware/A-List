@@ -1,0 +1,62 @@
+﻿@model AList.Models.ViewModels.AListVM
+<div class="bg-dark">
+    <nav id="scrollspyNavBar" class="navbar navbar-light bg-dark rounded">
+        <ul class="nav nav-pills">
+            <li>
+                <a asp-controller="Movie" asp-action="Create" class="btn btn-success m-1">Add Movie</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle bg-secondary text-dark m-1" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Movie List</a>
+                <div class="dropdown-menu">
+                    @foreach (Movie movie in Model.Movies)
+                    {
+                        <a class="dropdown-item text-dark" href="#@movie.Id">@movie.Title</a>
+                    }
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div data-spy="scroll" data-target="#scrollspyNavBar" data-offset="0" class="scrollspy" tabindex="0" style="position: relative;
+
+    overflow: auto;">
+        @foreach (Movie movie in Model.Movies)
+        {
+            <div class="d-flex justify-content-center">
+                <div class="card bg-dark" style="width: 98%;" id="@movie.Id">
+                    <div class="row no-gutters">
+                        <div class="col-sm-5">
+                            <img class="card-img" src="@movie.ImageUrl" style="height: 300px">
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <div class="card-body col-sm-9">
+                                    <h3 class="card-title">@movie.Title</h3>
+                                    <p class="card-text">Director: @movie.Director</p>
+                                    <h4 class="card-text">Actors</h4>
+                                    <div style="height: 100px; width: 100%; overflow: auto;">
+                                        @if (movie.Actors != null)
+                                        {
+                                            @foreach (Actor actor in movie.Actors.ToList().OrderBy(x => x.FirstName).ThenBy(x => x.LastName).ToList())
+                                            {
+                                                <p class="card-text">@actor.FirstName @actor.LastName</p>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-primary m-1" style="width:150px" asp-controller="Movie" 
+                                    asp-action="Edit" asp-route-id="@movie.Id">Edit Movie</a>
+
+                                    <a class="btn btn-danger m-1" style="width:150px" asp-controller="Movie" 
+                                    asp-action="Delete" asp-route-id="@movie.Id">Delete Movie</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

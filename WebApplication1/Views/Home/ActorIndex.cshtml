@@ -1,0 +1,61 @@
+﻿@model AList.Models.ViewModels.AListVM
+<div class="bg-dark">
+    <nav id="scrollspyNavBar" class="navbar navbar-light bg-dark rounded">
+        <ul class="nav nav-pills">
+            <li >
+                <a asp-controller="Actor" asp-action="Create" class="btn btn-success m-1">Add Actor</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle bg-secondary text-dark m-1" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Actor List</a>
+                <div class="dropdown-menu">
+                    @foreach (Actor actor in Model.Actors)
+                    {
+                        <a class="dropdown-item text-dark" href="#@actor.Id">@actor.FirstName  @actor.LastName</a>
+                    }
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div data-spy="scroll" data-target="#scrollspyNavBar" data-offset="0" class="scrollspy" tabindex="0" style="position: relative;
+
+    overflow: auto;">
+        @foreach (Actor actor in Model.Actors)
+        {
+            <div class="d-flex justify-content-center">
+                <div class="card bg-dark" style="width: 98%;" id="@actor.Id">
+                    <div class="row no-gutters">
+                        <div class="col-sm-5">
+                            <img class="card-img" src="@actor.ImageUrl" style="height: 300px">
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <div class="card-body col-sm-9">
+                                    <h3 class="card-title">@actor.FirstName  @actor.LastName</h3>
+                                    <p class="card-text">Age: @actor.Age</p>
+                                    <h4 class="card-text">Movies</h4>
+                                    <div style="height: 100px; width: 100%; overflow: auto;">
+                                        @if (actor.Movies != null)
+                                        {
+                                            @foreach (Movie movie in actor.Movies.ToList().OrderBy(x => x.Title).ToList())
+                                            {
+                                                <p class="card-text">@movie.Title</p>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-primary m-1" style="width:150px" asp-controller="Actor" 
+                                    asp-action="Edit" asp-route-id="@actor.Id">Edit Profile</a>
+
+                                    <a class="btn btn-danger m-1" style="width:150px" 
+                                    asp-controller="Actor" asp-action="Delete" asp-route-id="@actor.Id">Delete Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

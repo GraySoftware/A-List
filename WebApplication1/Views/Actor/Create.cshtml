@@ -1,0 +1,39 @@
+﻿@model AList.Models.ViewModels.ActorVM
+
+<h1>Create</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Actor.FirstName" class="control-label"></label>
+                <input asp-for="Actor.FirstName" class="form-control" />
+                <span asp-validation-for="Actor.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Actor.LastName" class="control-label"></label>
+                <input asp-for="Actor.LastName" class="form-control" />
+                <span asp-validation-for="Actor.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Actor.Age" class="control-label"></label>
+                <input asp-for="Actor.Age" class="form-control" />
+                <span asp-validation-for="Actor.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Actor.ImageUrl"></label>
+                <input type="file" id="uploadBox" name="file" class="form-control">
+            </div>
+            <partial name="_MovieListPartial" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

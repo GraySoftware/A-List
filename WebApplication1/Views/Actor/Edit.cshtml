@@ -1,0 +1,51 @@
+﻿@model AList.Models.ViewModels.ActorVM
+
+<h1>Edit</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    <input type="hidden" asp-for="Actor.Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Actor.FirstName" class="control-label"></label>
+                        <input asp-for="Actor.FirstName" class="form-control" />
+                        <span asp-validation-for="Actor.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Actor.LastName" class="control-label"></label>
+                        <input asp-for="Actor.LastName" class="form-control" />
+                        <span asp-validation-for="Actor.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Actor.Age" class="control-label"></label>
+                        <input asp-for="Actor.Age" class="form-control" />
+                        <span asp-validation-for="Actor.Age" class="text-danger"></span>
+                    </div>
+                    @if (Model.Actor.ImageUrl != null)
+                    {
+                        <img class="card-img mt-2 mb-2" src="@Model.Actor.ImageUrl" style="height:300px; width:300px;">
+                    }
+                    <div class="form-group">
+                        <label asp-for="Actor.ImageUrl"></label>
+                        <input type="file" id="uploadBox" name="file" class="form-control">
+                    </div>
+                </div>
+                <div class="col-6 pt-1" >
+                    <partial name="_MovieListPartial" />
+                </div>
+
+                <div class="form-group mt-2">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Actors</a>
+</div>
+

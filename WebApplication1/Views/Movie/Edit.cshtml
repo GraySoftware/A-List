@@ -1,0 +1,56 @@
+﻿@model AList.Models.ViewModels.MovieVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Movie.Id" />
+                    <div class="form-group">
+                        <label asp-for="Movie.Title" class="control-label"></label>
+                        <input asp-for="Movie.Title" class="form-control" />
+                        <span asp-validation-for="Movie.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Movie.Director" class="control-label"></label>
+                        <input asp-for="Movie.Director" class="form-control" />
+                        <span asp-validation-for="Movie.Director" class="text-danger"></span>
+                    </div>
+                    @if (Model.Movie.ImageUrl != null && Model.Movie.ImageUrl != "")
+                    {
+                        <img class="card-img mt-2 mb-2" src="@Model.Movie.ImageUrl" style="height:300px; width:300px;">
+                    }
+                    <div class="form-group">
+                        <label asp-for="Movie.ImageUrl"></label>
+                        <input type="file" id="uploadBox" name="file" class="form-control">
+                    </div>
+                </div>
+                <div class="col-6 pt-1">
+                    <partial name="_ActorListPartial" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
